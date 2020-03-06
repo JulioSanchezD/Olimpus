@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block body %}
+<link rel="stylesheet" href="../static/css/robots.css">
+<div class="section container">
+    <div class="row center">
+        <div class="col" style="width: 100%">
+            <div class="content-box animated" data-sr-id="1" style="visibility: visible;  -webkit-transform: translateY(0) scale(1); opacity: 1;transform: translateY(0) scale(1); opacity: 1;-webkit-transition: -webkit-transform 0.5s cubic-bezier(0.6, 0.2, 0.1, 1) 0s, opacity 0.5s cubic-bezier(0.6, 0.2, 0.1, 1) 0s; transition: transform 0.5s cubic-bezier(0.6, 0.2, 0.1, 1) 0s, opacity 0.5s cubic-bezier(0.6, 0.2, 0.1, 1) 0s; ">
+                <div class="i_title">
+                    <br>
+                    <div class="name">{{ title.strip("Olimpus: ") }}</div>
+                </div>
+                <div>
+                    <form method="POST" action="">
+                        {% block form %}{% endblock %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script type="application/javascript">
+jQuery('input[type=file]').change(function(){
+    const filename = jQuery(this).val().split('\\').pop();
+    const idname = jQuery(this).attr('id');
+    console.log(jQuery(this));
+    console.log(filename);
+    console.log(idname);
+    jQuery('span.'+idname).next().find('span').html(filename);
+});
+</script>
+{% endblock %}
