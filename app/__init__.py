@@ -9,6 +9,6 @@ def create_app():
 
     app.register_blueprint(main)
     app.register_blueprint(robots)
-    app.url_map.strict_slashes = False
+    # app.url_map.strict_slashes = False # TODO delete?
 
     return app
