@@ -17,8 +17,8 @@ def pcmiler():
         file.save(filename)
         res = pcmiler_script.run(filename)
         return res
-    return render_template('pcmiler.html', title="Olimpus: PC Miler")
-    # TODO check methods
+    elif request.method == 'GET':
+        return render_template('pcmiler.html', title="Olimpus: PC Miler")
 
 
 @robots.route("/robot1")
