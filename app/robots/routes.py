@@ -1,6 +1,7 @@
-from flask import Blueprint, render_template, request, jsonify
-
+from flask import Blueprint, render_template, request, flash, redirect
 from app.robots.bp import robot1
+from app.robots.ibm.pcmiler import pcmiler_script
+from werkzeug.utils import secure_filename
 
 robots = Blueprint('robots', __name__)
 
@@ -8,7 +9,14 @@ robots = Blueprint('robots', __name__)
 @robots.route("/pcmiler", methods=['GET', 'POST'])
 def pcmiler():
     if request.method == 'POST':
-        return jsonify({"result": request.get_array(field_name='input_data')})
+        file = request.files['input_data']
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(request.url)
+        filename: str = f"{robots.root_path}\\ibm\\pcmiler\\{secure_filename(file.filename)}"
+        file.save(filename)
+        res = pcmiler_script.run(filename)
+        return res
     return render_template('pcmiler.html', title="Olimpus: PC Miler")
     # TODO check methods
 
