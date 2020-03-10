@@ -1,6 +1,9 @@
 {% extends "robots_layout.html" %}
 {% block form %}
     <div>
+        {% for message in get_flashed_messages() %}
+        <p style="color: red;">{{ message }}</p>
+        {% endfor %}
         <span class="input_data">
             <input type="file" id="input_data" name="input_data">
         </span>
