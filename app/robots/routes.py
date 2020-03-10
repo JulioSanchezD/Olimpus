@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, flash, redirect
 from app.robots.bp import robot1
-from app.robots.ibm.pcmiler import pcmiler_script
+from app.robots.ibm.pcmiler.pcmiler_script import PCMiler
 from werkzeug.utils import secure_filename
 
 robots = Blueprint('robots', __name__)
@@ -8,17 +8,20 @@ robots = Blueprint('robots', __name__)
 
 @robots.route("/pcmiler", methods=['GET', 'POST'])
 def pcmiler():
+    status: str = ""
     if request.method == 'POST':
         file = request.files['input_data']
         if file.filename == '':
             flash('No selected file')
             return redirect(request.url)
-        filename: str = f"{robots.root_path}\\ibm\\pcmiler\\{secure_filename(file.filename)}"
-        file.save(filename)
-        res = pcmiler_script.run(filename)
-        return res
+        directory: str = f"{robots.root_path}\\ibm\\pcmiler\\"
+        filename: str = secure_filename(file.filename)
+        file.save(directory + filename)
+        PCMiler(directory=directory, filename=filename)
+        status = "Running program ..."
     elif request.method == 'GET':
-        return render_template('pcmiler.html', title="Olimpus: PC Miler")
+        status = "Waiting for user input ..."
+    return render_template('pcmiler.html', title="Olimpus: PC Miler", status=status)
 
 
 @robots.route("/robot1")
