@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, flash, redirect
+from flask_login import login_required
 from app.robots.bp import robot1
 from app.robots.ibm.pcmiler.pcmiler_script import PCMiler
 from werkzeug.utils import secure_filename
@@ -7,6 +8,7 @@ robots = Blueprint('robots', __name__)
 
 
 @robots.route("/pcmiler", methods=['GET', 'POST'])
+@login_required
 def pcmiler():
     status = ""
     if request.method == 'POST':
@@ -25,6 +27,7 @@ def pcmiler():
 
 
 @robots.route("/robot1")
+@login_required
 def robot():
     # robot1.status()
     return robot1.process()

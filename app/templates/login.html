@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Olimpus: Iniciar sesión</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/login.css') }}">
+        <link rel="shortcut icon" href="{{ url_for('static', filename='images/geodis_logo.png') }}" type="image/x-icon" />
+
+    </head>
+    <body>
+        <div id="formBlock">
+            <div class="logo"><img src="{{ url_for('static', filename='images/olimpus_logo.jpg') }}" alt="Olimpus logo"></div>
+            <label id="label1">Please log in to the best RPA platform</label>
+            <form id="formData" action="{{ url_for('main.login') }}" method="post">
+                <div class="form-group">
+                    <input type="email" class="form-control" name="email" aria-describedby="emailHelp" placeholder="email">
+                    <small id="emailHelp" class="form-text text-muted">We are not going to share any information</small>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" name="password" placeholder="Password">
+                </div>
+                <button type="submit" class="btn btn-primary">Log In</button>
+            </form>
+{#            <div id="pwreset" class="form-group">#}
+{#                <small class="text-muted ml-2">#}
+{#                    <a href="{{ url_for('users.reset_request') }}">¿Olvidó su contraseña?</a>#}
+{#                </small>#}
+{#            </div>#}
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul class=flashes>
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }} alert-dismissible" role="alert">
+                            <li>{{ message }}</li>
+                        </div>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        </div>
+    </body>
+</html>
