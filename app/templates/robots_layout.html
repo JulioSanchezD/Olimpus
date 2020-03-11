@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block body %}
-<link rel="stylesheet" href="../static/css/robots.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/robots.css') }}">
 <div class="section container">
     <div class="row center">
         <div class="col" style="width: 100%">
@@ -39,6 +39,5 @@ jQuery('input[type=file]').change(function(){
     console.log(idname);
     jQuery('span.'+idname).next().find('span').html(filename);
 });
-var
 </script>
 {% endblock %}
