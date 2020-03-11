@@ -5,9 +5,9 @@ import threading
 
 class PCMiler:
 
-    def __init__(self, filename: str, directory: str):
-        self.filename: str = filename
-        self.directory: str = directory
+    def __init__(self, filename, directory):
+        self.filename = filename
+        self.directory = directory
         thread = threading.Thread(target=self.run, args=())
         thread.daemon = True
         thread.start()

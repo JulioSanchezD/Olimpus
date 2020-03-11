@@ -8,14 +8,14 @@ robots = Blueprint('robots', __name__)
 
 @robots.route("/pcmiler", methods=['GET', 'POST'])
 def pcmiler():
-    status: str = ""
+    status = ""
     if request.method == 'POST':
         file = request.files['input_data']
         if file.filename == '':
             flash('No selected file')
             return redirect(request.url)
-        directory: str = f"{robots.root_path}\\ibm\\pcmiler\\"
-        filename: str = secure_filename(file.filename)
+        directory = f"{robots.root_path}\\ibm\\pcmiler\\"
+        filename = secure_filename(file.filename)
         file.save(directory + filename)
         PCMiler(directory=directory, filename=filename)
         status = "Running program ..."
