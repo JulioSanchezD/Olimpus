@@ -12,7 +12,7 @@ def handle_connect(client, userdata, flags, rc):
 @mqtt.on_message()
 def handle_mqtt_message(client, userdata, message):
     data = dict(
-        topic = message.topic,
-        payload = message.payload.decode()
+        topic=message.topic,
+        payload=message.payload.decode()
     )
     print(f"Topic: {data['topic']}\nMessage: {data['payload']}")

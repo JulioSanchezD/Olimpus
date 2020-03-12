@@ -37,7 +37,7 @@ def create_app():
     login_manager.init_app(app)
     bcrypt.init_app(app)
     mqtt.init_app(app)
-    mqtt.publish("test", 'Starting flask-mqtt server...')
+    mqtt.publish("test", 'Starting flask-mqtt server...'.encode('utf-8'))
     # socketio.init_app(app)
 
     from app.main.routes import main
