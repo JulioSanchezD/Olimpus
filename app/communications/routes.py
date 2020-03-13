@@ -1,5 +1,6 @@
-from app import mqtt
+from app import mqtt, socketio
 from flask import Blueprint
+import json
 
 communications = Blueprint('communications', __name__)
 
@@ -15,4 +16,9 @@ def handle_mqtt_message(client, userdata, message):
         topic=message.topic,
         payload=message.payload.decode()
     )
-    print(f"Topic: {data['topic']}\nMessage: {data['payload']}")
+    socketio.emit('new_data', json.dumps({"message": data['payload']}))
+
+
+# @socketio.on('test_socket')
+# # def handle_socketio_test(message):
+# #     socketio.emit('new_data', json.dumps({"test": message}))

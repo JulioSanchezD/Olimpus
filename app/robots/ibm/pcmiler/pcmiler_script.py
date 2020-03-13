@@ -15,5 +15,5 @@ class PCMiler:
     def run(self):
         df: pd.DataFrame = pd.read_excel(self.directory + self.filename)
         sleep(3)
-        with open(f"{self.directory}test.txt", 'w') as out:
-            out.writelines(df.head().to_string())
+        # with open(f"{self.directory}test.txt", 'w') as out:
+        #     out.writelines(df.head().to_string())
